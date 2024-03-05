@@ -46,10 +46,13 @@ def quit():
     sys.exit()
 
 def start_game():
+
     game_window.game_window_start()
+    pygame.quit()
 
 def razraby_ne_dauni():
     avtory_window.avtors_window_start()
+    pygame.quit()
 
 
 
