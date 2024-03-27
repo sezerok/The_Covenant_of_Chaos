@@ -13,7 +13,7 @@ class Player(pygame.sprite.Sprite):
         self.direction = pygame.math.Vector2(0,0)
         self.speed_player = 1
         self.gravity = 0.8
-        self.jump = -16
+        self.jump = -10
     #фуккция перемещения
     def move(self):
         keys = pygame.key.get_pressed()
@@ -30,8 +30,7 @@ class Player(pygame.sprite.Sprite):
 
         if keys[pygame.K_SPACE]:
             self.jumping()
-        else:
-            self.gravity_apply()
+
 
 
     def gravity_apply(self):
@@ -41,8 +40,8 @@ class Player(pygame.sprite.Sprite):
     def jumping(self):
         self.direction.y = self.jump
         self.rect.y += self.direction.y
-        self.direction.y = 0
+
 
     def update(self):
         self.move()
-        self.rect.x+=self.direction.x*self.speed_player
+        #self.rect.x+=self.direction.x*self.speed_player

@@ -26,9 +26,36 @@ class Level:
                     y = row_index * tile_size
                     player = Player((x, y))
                     self.player_sprite.add(player)
+    def OX_colliding(self):
+        player = self.player_sprite.sprite
+        player.rect.x += player.direction.x * player.speed_player
+        for sprites in self.tiles.sprites():
+
+            if sprites.rect.colliderect(player.rect):
+                if player.direction.x<0:
+                    player.rect.left=sprites.rect.right
+
+                elif player.direction.x>0:
+                    player.rect.right=sprites.rect.left
+
+    def OY_colliding(self):
+        player = self.player_sprite.sprite
+        player.gravity_apply()
+        # player.direction.y += player.gravity
+        # player.rect.y += player.direction.y
+        for sprites in self.tiles.sprites():
+            if sprites.rect.colliderect(player.rect):
+                if player.direction.y<0:
+                    player.rect.top=sprites.rect.bottom
+                    player.direction.y = 0
+                elif player.direction.y>0:
+                    player.rect.bottom=sprites.rect.top
+                    player.direction.y = 0
     def run(self):
         self.tiles.update(self.map_shift) # отвечает за смещение карты по оси x
         self.tiles.draw(self.display_surface)
 
         self.player_sprite.update()
+        self.OX_colliding()
+        self.OY_colliding()
         self.player_sprite.draw(self.display_surface)

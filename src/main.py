@@ -9,7 +9,6 @@ screen = pygame.display.set_mode((screen_width, screen_height))
 pygame.display.set_caption("TheCovenantOfChaos")
 
 clock = pygame.time.Clock()
-
 level = Level(level_map, screen)
 
 while True:
