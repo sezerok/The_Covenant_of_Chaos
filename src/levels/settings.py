@@ -12,7 +12,7 @@ level_map = [
     'XXXXXXXXXXXXXX   XXXXX    XXX ',
 ]
 
-# размер плитк1
+# размер плитки
 tile_size = 64
 screen_width = 1200
 screen_height = len(level_map) * tile_size

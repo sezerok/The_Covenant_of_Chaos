@@ -3,25 +3,31 @@ from sys import exit
 from levels.settings import *
 from levels.level import Level
 
-pygame.init()
+# TODO: минимизировать глобальные переменные (требование не засорять глоб. обл. видимости)
 
-screen = pygame.display.set_mode((screen_width, screen_height))
-pygame.display.set_caption("TheCovenantOfChaos")
+def main():
+    pygame.init()
 
-clock = pygame.time.Clock()
-level = Level(level_map, screen)
+    screen = pygame.display.set_mode((screen_width, screen_height))
+    pygame.display.set_caption("TheCovenantOfChaos")
 
-while True:
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            pygame.quit()
-            exit()
+    clock = pygame.time.Clock()
+    level = Level(level_map, screen)
 
-    screen.fill('black')
-    level.run()
+    # TODO: меню входа
+    while True:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                exit()
 
-    pygame.display.update()
-    clock.tick(60) # fps control
+        # TODO: установка фона + смена уровня
+        screen.fill('black')
+        level.run()
 
+        pygame.display.update()
+        clock.tick(60) # fps control
+
+main()
 
 

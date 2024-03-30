@@ -11,19 +11,25 @@ class Player(pygame.sprite.Sprite):
         self.rect = self.image.get_rect(topleft = pos)
         #движение игрока
         self.direction = pygame.math.Vector2(0,0)
-        self.speed_player = 1
+        self.speed_player = 8
         self.gravity = 0.8
         self.jump = -10
+
     #фуккция перемещения
     def move(self):
         keys = pygame.key.get_pressed()
+
         if keys[pygame.K_d]:
-            self.direction.x=1
+            self.direction.x = 1
         elif keys[pygame.K_a]:
-            self.direction.x=-1
+            self.direction.x = -1
         else:
             self.direction.x = 0
-        if keys[pygame.K_o]:
+
+        # TODO: испроавить баг с камерой и передвижением
+        # если закомментить блок ускорения, то камера фиксится
+        # НО отваливается скорость при прыжке
+        if keys[pygame.K_LSHIFT]:
             self.speed_player = 16
         else:
             self.speed_player = 8
@@ -31,11 +37,9 @@ class Player(pygame.sprite.Sprite):
         if keys[pygame.K_SPACE]:
             self.jumping()
 
-
-
     def gravity_apply(self):
         self.direction.y += self.gravity
-        self.rect.y +=self.direction.y
+        self.rect.y += self.direction.y
 
     def jumping(self):
         self.direction.y = self.jump
@@ -44,4 +48,4 @@ class Player(pygame.sprite.Sprite):
 
     def update(self):
         self.move()
-        #self.rect.x+=self.direction.x*self.speed_player
+        # self.rect.x+=self.direction.x*self.speed_player
