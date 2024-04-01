@@ -1,7 +1,7 @@
 import pygame
-from levels.tiles import Tile
-from levels.settings import tile_size, screen_width
-from levels.player import Player
+from src.levels.tiles import Tile
+from src.levels.settings import tile_size, screen_width
+from src.levels.player import Player
 
 class Level:
     def __init__(self, level_data, surface):
@@ -49,6 +49,7 @@ class Level:
                     player.direction.y = 0
                 elif player.direction.y > 0:
                     player.rect.bottom = sprites.rect.top
+                    player.j()
                     player.direction.y = 0
 
     # движение камеры
