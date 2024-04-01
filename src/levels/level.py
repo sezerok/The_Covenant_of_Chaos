@@ -10,6 +10,7 @@ class Level:
         self.map_shift = 0 # насколько сместить по оси х
 
     # метод установления разметки
+    #
     def setup_level(self, layout):
         self.tiles = pygame.sprite.Group()
         self.player_sprite = pygame.sprite.GroupSingle()
@@ -37,6 +38,7 @@ class Level:
                 elif player.direction.x > 0:
                     player.rect.right = sprites.rect.left
 
+
     def OY_colliding(self):
         player = self.player_sprite.sprite
         player.gravity_apply()
@@ -59,14 +61,20 @@ class Level:
         direction = player.direction.x
 
         if player_coord_x < screen_width / 4 and direction < 0:
-            self.map_shift = player.speed_player
-            player.speed_player = 0
+
+            self.map_shift = 8
+            player.stop()
+            print(self.map_shift)
+            # print(player.speed_player)
+
         elif player_coord_x > screen_width - (screen_width / 4) and direction > 0:
-            self.map_shift = -player.speed_player
-            player.speed_player = 0
+            self.map_shift = -8
+            player.stop()
+            print(self.map_shift)
         else:
             self.map_shift = 0
-            player.speed_player = 8
+            player.start()
+            print(self.map_shift)
 
 
     def run(self):
@@ -74,11 +82,12 @@ class Level:
         self.tiles.update(self.map_shift) # отвечает за смещение карты по оси x
         self.tiles.draw(self.display_surface)
 
+        # движение камеры
+        self.cameraScroll_X()
+
         # игрок
         self.player_sprite.update()
         self.OX_colliding()
         self.OY_colliding()
         self.player_sprite.draw(self.display_surface)
 
-        # движение камеры
-        self.cameraScroll_X()

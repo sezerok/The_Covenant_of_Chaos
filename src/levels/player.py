@@ -27,18 +27,23 @@ class Player(pygame.sprite.Sprite):
         else:
             self.direction.x = 0
 
+
+
         # TODO: испроавить баг с камерой и передвижением
         # если закомментить блок ускорения, то камера фиксится
         # НО отваливается скорость при прыжке
-        if keys[pygame.K_LSHIFT]:
-            self.speed_player = 16
-        else:
-            self.speed_player = 8
+        # if keys[pygame.K_LSHIFT]:
+        #     self.speed_player = 12
+        # else:
+        #     self.speed_player = 8
 
         if keys[pygame.K_SPACE] and self.j_val==False:
             self.jumping()
             self.j_val=True
-
+    def stop(self):
+        self.speed_player = 0
+    def start(self):
+        self.speed_player = 8
     def j(self):
         self.j_val = False
     def gravity_apply(self):
