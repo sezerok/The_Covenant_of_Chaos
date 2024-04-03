@@ -15,6 +15,11 @@ class Player(pygame.sprite.Sprite):
         self.gravity = 0.8
         self.jump = -16
         self.j_val = False
+        self.attack = False
+
+    def attack_player(self):
+        self.attack = True
+
 
     #фуккция перемещения
     def move(self):
@@ -26,6 +31,7 @@ class Player(pygame.sprite.Sprite):
             self.direction.x = -1
         else:
             self.direction.x = 0
+
 
 
 

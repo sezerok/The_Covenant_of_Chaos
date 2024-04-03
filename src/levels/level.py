@@ -64,17 +64,17 @@ class Level:
 
             self.map_shift = 8
             player.stop()
-            print(self.map_shift)
+            #print(self.map_shift)
             # print(player.speed_player)
 
         elif player_coord_x > screen_width - (screen_width / 4) and direction > 0:
             self.map_shift = -8
             player.stop()
-            print(self.map_shift)
+            #print(self.map_shift)
         else:
             self.map_shift = 0
             player.start()
-            print(self.map_shift)
+            #print(self.map_shift)
 
 
     def run(self):
