@@ -2,14 +2,14 @@ level_map = [
     '                                           ',
     '                                           ',
     '   P                                       ',
-    ' XXX      XXX          XXX                 ',
+    ' GGG      GGG        GGGGG                 ',
     ' XXX                                       ',
-    ' XXXXX         XXX         XX              ',
-    ' XX             XXX       XXX              ',
-    ' X      XXXXXX   XXXXX    XXX              ',
-    '        XXXXXX   XXXXX    XXX              ',
-    '     XXXXXXXXX   XXXXX    XXX              ',
-    'XXXXXXXXXXXXXX   XXXXX    XXXXXXXXXXXXXXXX ',
+    ' XXXGG         GGG        GG               ',
+    ' XX             XXG       XXG              ',
+    ' X       GGGGG   XXGGG    XXX     GGGG     ',
+    '        GXXXXX   XXXXX    XXXGG      XX    ',
+    '     GGGXXXXXX   XXXXX    XXXXXG           ',
+    'GGGGGXXXXXXXXX   XXXXX    XXXXXXGG    GGGG ',
 ]
 
 # размер плитки

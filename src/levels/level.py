@@ -20,8 +20,17 @@ class Level:
                 x = col_index * tile_size
                 y = row_index * tile_size
                 if value == 'X':
-                    tile = Tile((x, y), tile_size)
+                    tile = Tile((x, y), tile_size, 'ground_main')
                     self.tiles.add(tile)
+                if value == 'G':
+                    type_of_tile = 'ground_top'
+                    if layout[row_index][col_index-1] == ' ':
+                        type_of_tile += '_left'
+                    elif layout[row_index][col_index+1] == ' ':
+                        type_of_tile += '_right'
+                    tile = Tile((x, y), tile_size, type_of_tile)
+                    self.tiles.add(tile)
+
                 if value == 'P':
                     player = Player((x, y))
                     self.player_sprite.add(player)
