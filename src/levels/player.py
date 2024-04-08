@@ -16,11 +16,14 @@ class Player(pygame.sprite.Sprite):
         self.jump = -16
         self.j_val = False
         self.attack = False
-
+        self.health = 1
     def attack_player(self):
         self.attack = True
 
-
+    def take_damage(self,damage):
+        self.health-=damage
+        if self.health<=0:
+            self.stop()
     #фуккция перемещения
     def move(self):
         keys = pygame.key.get_pressed()

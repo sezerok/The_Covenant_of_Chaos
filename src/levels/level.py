@@ -2,6 +2,8 @@ import pygame
 from src.levels.tiles import Tile
 from src.levels.settings import tile_size, screen_width
 from src.levels.player import Player
+from src.levels.thorns import Thorn
+
 
 class Level:
     def __init__(self, level_data, surface):
@@ -14,6 +16,8 @@ class Level:
     def setup_level(self, layout):
         self.tiles = pygame.sprite.Group()
         self.player_sprite = pygame.sprite.GroupSingle()
+        self.enemy_sprite = pygame.sprite.GroupSingle()
+
         # перебор данных разметки
         for row_index, row in enumerate(layout):
             for col_index, value in enumerate(row):
@@ -34,9 +38,15 @@ class Level:
                 if value == 'P':
                     player = Player((x, y))
                     self.player_sprite.add(player)
+                if value == 'T':
+                    thorn = Thorn(tile_size,(x,y))
+                    self.tiles.add(thorn)
 
-    def OX_colliding(self):
+
+
+    def OX_colliding_pl(self):
         player = self.player_sprite.sprite
+
         player.rect.x += player.direction.x * player.speed_player
         for sprites in self.tiles.sprites():
 
@@ -46,9 +56,13 @@ class Level:
 
                 elif player.direction.x > 0:
                     player.rect.right = sprites.rect.left
+                if isinstance(self.player_sprite,self.tiles):
+                    self.player_sprite.take_damage(10)
+                    print(10)
 
 
-    def OY_colliding(self):
+
+    def OY_colliding_pl(self):
         player = self.player_sprite.sprite
         player.gravity_apply()
         # player.direction.y += player.gravity
@@ -62,6 +76,7 @@ class Level:
                     player.rect.bottom = sprites.rect.top
                     player.j()
                     player.direction.y = 0
+
 
     # движение камеры
     def cameraScroll_X(self):
@@ -87,6 +102,10 @@ class Level:
 
 
     def run(self):
+        #враг
+        self.enemy_sprite.draw(self.display_surface)
+
+
         # платформы уровня
         self.tiles.update(self.map_shift) # отвечает за смещение карты по оси x
         self.tiles.draw(self.display_surface)
@@ -96,7 +115,7 @@ class Level:
 
         # игрок
         self.player_sprite.update()
-        self.OX_colliding()
-        self.OY_colliding()
+        self.OX_colliding_pl()
+        self.OY_colliding_pl()
         self.player_sprite.draw(self.display_surface)
 
