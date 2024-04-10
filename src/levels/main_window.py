@@ -9,7 +9,7 @@ class Main_Window:
         self.initial_number = 0
         self.display_surface = surface
         self.level = Level(level_map,self.display_surface)
-        self.button_start_game = button("Начать игру", 40, 400, 100, (255,0,0), 200, 200)
+        self.button_start_game = button("Играть", 40, 400, 100, (255,0,0), 200, 200)
         self.button_avtory = button("Авторы", 40, 400, 100, (255,0,0), 200, 350)
         self.buttun_quit = button("Выход", 40, 400, 100, (255,0,0), 200, 500)
 
@@ -35,12 +35,12 @@ class Main_Window:
             pass
 
         pygame.display.flip()
+
     def razraby_ne_dauni(self):
         self.initial_number = 2
     def esc(self):
         if self.initial_number!=0:
             self.initial_number = 0
-
 
     def start_game(self):
         self.initial_number = 1
