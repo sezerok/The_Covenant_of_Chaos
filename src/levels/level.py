@@ -49,7 +49,7 @@ class Level:
                     self.enemy_sprite.add(thorn)
 
                 if value == 'H':
-                    heal = Heal((x,y), tile_size, "heal_bottle")
+                    heal = HealBottle((x, y), tile_size, "heal_bottle")
                     self.heal_sprite.add(heal)
 
 

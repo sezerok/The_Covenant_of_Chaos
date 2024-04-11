@@ -31,12 +31,12 @@ class Thorn(Tile):
     def damage(self):
         return 10
 
-class Heal(Tile):
+class HealBottle(Tile):
     def __init__(self, pos, size, type_of_tile):
         super().__init__(pos, size, type_of_tile)
-        self.flag = 2
+        self.flag = 1
     def healing(self,hp):
-        if self.flag != 0 and hp+10 <= 100:
+        if self.flag != 0 and hp + 10 <= 100:
             self.flag -= 1
             self.image.fill((0, 0, 100))
             return 10
