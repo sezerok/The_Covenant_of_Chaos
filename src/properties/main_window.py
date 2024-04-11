@@ -1,7 +1,7 @@
 
-from src.levels.buttons import *
+from src.properties.buttons import *
 from  src.levels.level import Level
-from src.levels.settings import *
+from src.properties.settings import *
 import pygame
 class Main_Window:
     def __init__(self,surface):

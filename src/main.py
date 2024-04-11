@@ -1,9 +1,7 @@
-import pygame
 from sys import exit
-from levels.settings import *
-from levels.level import Level
-from src.levels.main_window import Main_Window
-from src.levels.buttons import *
+from src.properties.settings import *
+from src.properties.main_window import Main_Window
+from src.properties.buttons import *
 
 # TODO: минимизировать глобальные переменные (требование не засорять глоб. обл. видимости)
 
@@ -18,6 +16,7 @@ def main():
 
     main_win = Main_Window(screen)
 
+    bg_image = pygame.image.load('levels/res/bg_one.png').convert_alpha()
 
     # TODO: меню входа
     while True:
@@ -30,11 +29,9 @@ def main():
                     main_win.esc()
 
         # TODO: установка фона + смена уровня
-        screen.fill('black')
+        screen.blit(bg_image, (0, 0))
 
         main_win.run() #загрузка главного меню
-
-
 
         pygame.display.update()
         clock.tick(60) # fps control

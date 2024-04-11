@@ -1,11 +1,9 @@
-import time
-
 import pygame
-from src.levels.tiles import Tile
-from src.levels.settings import tile_size, screen_width
+from src.levels.tiles import *
+from src.properties.settings import tile_size, screen_width
 from src.levels.player import Player
-from src.levels.thorns import Thorn
-from src.levels.heal import Heal
+# from src.levels.thorns import Thorn
+# from src.levels.heal import Heal
 from src.levels.health_bar import HealthBar
 
 
@@ -17,7 +15,6 @@ class Level:
         self.map_shift = 0 # насколько сместить по оси х
 
     # метод установления разметки
-    #
     def setup_level(self, layout):
         self.hearth_bar = HealthBar(10, 10, 300, 40, 100)
         self.tiles = pygame.sprite.Group()
@@ -48,11 +45,11 @@ class Level:
                     self.player_sprite.add(player)
 
                 if value == 'T':
-                    thorn = Thorn(tile_size,(x,y))
+                    thorn = Thorn((x,y), tile_size, "thorn")
                     self.enemy_sprite.add(thorn)
 
                 if value == 'H':
-                    heal = Heal(tile_size,(x,y))
+                    heal = Heal((x,y), tile_size, "heal_bottle")
                     self.heal_sprite.add(heal)
 
 
@@ -106,7 +103,6 @@ class Level:
         direction = player.direction.x
 
         if player_coord_x < screen_width / 4 and direction < 0:
-
             self.map_shift = 8
             player.speed_player = 0
 

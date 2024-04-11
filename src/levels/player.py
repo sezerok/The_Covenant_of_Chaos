@@ -44,7 +44,6 @@ class Player(pygame.sprite.Sprite):
 
     #фуккция перемещения
     def move(self):
-
         keys = pygame.key.get_pressed()
 
         if keys[pygame.K_d]:
@@ -53,10 +52,6 @@ class Player(pygame.sprite.Sprite):
             self.direction.x = -1
         else:
             self.direction.x = 0
-
-
-
-
 
         # TODO: испроавить баг с камерой и передвижением
         # если закомментить блок ускорения, то камера фиксится
@@ -69,6 +64,12 @@ class Player(pygame.sprite.Sprite):
         if keys[pygame.K_SPACE] and self.j_val==False:
             self.jumping()
             self.j_val=True
+
+    # def stop(self):
+    #     self.speed_player = 0
+    def start(self):
+        self.speed_player = 8
+
     def stop(self):
         # self.j_val = True
         self.death = True
@@ -96,8 +97,6 @@ class Player(pygame.sprite.Sprite):
         # self.death = False
         self.invincible = False
 
-    def start(self):
-        self.speed_player = 8
     def j(self):
         self.j_val = False
     def gravity_apply(self):
