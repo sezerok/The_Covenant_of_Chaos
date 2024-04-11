@@ -33,12 +33,12 @@ class WindowManager:
 
         pygame.display.flip()
 
-    def razraby_ne_dauni(self):
-        self.initial_number = 2
-
     def esc(self):
         if self.initial_number != 0:
             self.initial_number = 0
 
     def start_game(self):
         self.initial_number = 1
+
+    def razraby_ne_dauni(self):
+        self.initial_number = 2

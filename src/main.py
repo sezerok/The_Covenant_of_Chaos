@@ -16,7 +16,6 @@ def main():
 
     bg_image = pygame.image.load('levels/res/bg_one.png').convert_alpha()
 
-    # TODO: меню входа
     while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:

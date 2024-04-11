@@ -73,7 +73,12 @@ class Player(pygame.sprite.Sprite):
     def stop(self):
         if self.health == 0:
             time.sleep(0.5)
-            self.respawn()
+            self.death = True
+            #self.respawn()
+    def return_death(self):
+
+        return self.death
+
 
     def respawn(self):
         self.rect = self.image.get_rect(topleft=self.start_position)

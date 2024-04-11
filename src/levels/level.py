@@ -52,6 +52,17 @@ class Level:
                     heal = HealBottle((x, y), tile_size, "heal_bottle")
                     self.heal_sprite.add(heal)
 
+    def check(self):
+        return self.player_sprite.sprite.return_death()
+    def respawn(self, flag):
+        if flag == True:
+            self.player_sprite.sprite.respawn()
+            for sprite in self.enemy_sprite.sprites():
+                sprite.restart()
+            for sprite in self.heal_sprite.sprites():
+                sprite.restart()
+            for sprite in self.tiles.sprites():
+                sprite.restart()
 
 
     def OX_colliding_pl(self):
@@ -68,6 +79,7 @@ class Level:
             if sprites.rect.colliderect(player.rect):
                 player.take_damage(sprites.damage())
                 self.hearth_bar.hp = player.return_hp()
+
 
         for sprites in self.tiles.sprites():
             if sprites.rect.colliderect(player.rect):
@@ -116,6 +128,7 @@ class Level:
 
 
     def run(self):
+
         #враг
         self.enemy_sprite.update(self.map_shift)
         self.enemy_sprite.draw(self.display_surface)
@@ -124,12 +137,14 @@ class Level:
         self.heal_sprite.update(self.map_shift)
         self.heal_sprite.draw(self.display_surface)
 
-        #шкала здоровья
-        self.hearth_bar.draw(self.display_surface)
+        self.respawn(self.check())
 
         # платформы уровня
         self.tiles.update(self.map_shift) # отвечает за смещение карты по оси x
         self.tiles.draw(self.display_surface)
+
+        # шкала здоровья
+        self.hearth_bar.draw(self.display_surface)
 
         # движение камеры
         self.cameraScroll_X()

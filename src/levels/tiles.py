@@ -9,7 +9,10 @@ class Tile(pygame.sprite.Sprite):
         # self.main_ground_image = pygame.image.load('levels/res/ground_main.png').convert()
         # self.image = pygame.transform.scale(self.main_ground_image, (size, size))
         self.select_image(type_of_tile, size)
-        self.rect = self.image.get_rect(topleft=pos) # определение расположения
+        self.rect = self.image.get_rect(topleft = pos) # определение расположения
+        self.start_pos = pos
+    def restart(self):
+        self.rect = self.image.get_rect(topleft=self.start_pos)
 
     def select_image(self, type_of_tile, size):
         if type_of_tile == "thorn":
