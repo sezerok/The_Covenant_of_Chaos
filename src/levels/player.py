@@ -24,6 +24,10 @@ class Player(pygame.sprite.Sprite):
         self.invincibility_timer = 0
         self.invincibility_duration = 1  # секунды
 
+    def take_spawn(self, rect):
+        print(rect)
+        self.start_position = rect
+
     def attack_player(self):
         self.attack = True
 
@@ -76,11 +80,11 @@ class Player(pygame.sprite.Sprite):
             self.death = True
             #self.respawn()
     def return_death(self):
-
         return self.death
 
 
     def respawn(self):
+
         self.rect = self.image.get_rect(topleft=self.start_position)
         self.death = False
         self.health = 100
@@ -100,6 +104,8 @@ class Player(pygame.sprite.Sprite):
 
     def update(self):
         self.move()
+        if self.rect.y > 4000:
+            self.death = True
         if self.invincible:
             # обновляем таймер неуязвимости
             current_time = time.time()
