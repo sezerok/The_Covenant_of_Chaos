@@ -82,9 +82,7 @@ class Player(pygame.sprite.Sprite):
     def return_death(self):
         return self.death
 
-
     def respawn(self):
-
         self.rect = self.image.get_rect(topleft=self.start_position)
         self.death = False
         self.health = 100
@@ -100,7 +98,6 @@ class Player(pygame.sprite.Sprite):
     def jumping(self):
         self.direction.y = self.jump
         self.rect.y += self.direction.y
-
 
     def update(self):
         self.move()

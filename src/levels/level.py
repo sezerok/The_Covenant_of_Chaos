@@ -84,7 +84,7 @@ class Level:
 
         for sprites in self.final.sprites():
             if sprites.rect.colliderect(player.rect):
-                sprites.draw_popup(self.display_surface, "вы прошли игру!")
+                sprites.draw_popup(self.display_surface, "Вы прошли игру!")
                 time.sleep(5)
                 quit()
 

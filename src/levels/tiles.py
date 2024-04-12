@@ -22,6 +22,7 @@ class Tile(pygame.sprite.Sprite):
         #print((int(self.rect.x), int(self.rect.y)))
         self.start_pos = pos
         #print(pos)
+
     def restart(self):
         self.rect = self.image.get_rect(topleft = self.start_pos)
 
@@ -71,6 +72,7 @@ class SpawnPoint(Tile):
     def spawn(self):
         self.flag = True
         return self.pos
+
 class FinalTile(Tile):
     def __init__(self, pos, size, type_of_tile):
         super().__init__(pos, size, type_of_tile)
