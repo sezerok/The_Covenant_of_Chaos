@@ -25,7 +25,6 @@ class Player(pygame.sprite.Sprite):
         self.invincibility_duration = 1  # секунды
 
     def take_spawn(self, rect):
-        print(rect)
         self.start_position = rect
 
     def attack_player(self):

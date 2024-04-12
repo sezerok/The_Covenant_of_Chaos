@@ -68,6 +68,8 @@ class Level:
     def respawn(self, flag):
         if flag == True:
             self.player_sprite.sprite.respawn()
+            for sprite in self.final.sprites():
+                sprite.restart()
             for sprite in self.spawnpoint.sprites():
                 sprite.restart()
             for sprite in self.enemy_sprite.sprites():
@@ -169,6 +171,7 @@ class Level:
         self.spawnpoint.update(self.map_shift)
         self.spawnpoint.draw(self.display_surface)
 
+        #блок финала
         self.final.update(self.map_shift)
         self.final.draw(self.display_surface)
 
