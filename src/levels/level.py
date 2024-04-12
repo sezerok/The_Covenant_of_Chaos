@@ -11,9 +11,9 @@ from src.levels.health_bar import HealthBar
 
 class Level:
     def __init__(self, level_data, surface):
-        self.display_surface = surface # поверхность, на которой отображается уровень
-        self.setup_level(level_data) # установка разметки
-        self.map_shift = 0 # насколько сместить по оси х
+        self.display_surface = surface
+        self.setup_level(level_data)  # установка разметки
+        self.map_shift = 0
 
     # метод установления разметки
     def setup_level(self, layout):
@@ -36,9 +36,9 @@ class Level:
 
                 if value == 'G':
                     type_of_tile = 'ground_top'
-                    if layout[row_index][col_index-1] == ' ':
+                    if layout[row_index][col_index - 1] == ' ':
                         type_of_tile += '_left'
-                    elif layout[row_index][col_index+1] == ' ':
+                    elif layout[row_index][col_index + 1] == ' ':
                         type_of_tile += '_right'
                     tile = Tile((x, y), tile_size, type_of_tile)
                     self.tiles.add(tile)
@@ -48,7 +48,7 @@ class Level:
                     self.player_sprite.add(player)
 
                 if value == 'T':
-                    thorn = Thorn((x,y), tile_size, "thorn")
+                    thorn = Thorn((x, y), tile_size, "thorn")
                     self.enemy_sprite.add(thorn)
 
                 if value == 'H':
@@ -65,20 +65,28 @@ class Level:
 
     def check(self):
         return self.player_sprite.sprite.return_death()
-    def respawn(self, flag):
-        if flag == True:
-            self.player_sprite.sprite.respawn()
-            for sprite in self.final.sprites():
-                sprite.restart()
-            for sprite in self.spawnpoint.sprites():
-                sprite.restart()
-            for sprite in self.enemy_sprite.sprites():
-                sprite.restart()
-            for sprite in self.heal_sprite.sprites():
-                sprite.restart()
-            for sprite in self.tiles.sprites():
-                sprite.restart()
 
+    def respawn(self, flag):
+        if flag:
+            self.player_sprite.sprite.respawn()
+            sprites = [self.final.sprites(), self.spawnpoint.sprites(),
+                       self.enemy_sprite.sprites(), self.heal_sprite.sprites(),
+                       self.tiles.sprites()]
+
+            for sprite_group in sprites:
+                for sprite in sprite_group:
+                    sprite.restart()
+
+            # for sprite in self.final.sprites():
+            #     sprite.restart()
+            # for sprite in self.spawnpoint.sprites():
+            #     sprite.restart()
+            # for sprite in self.enemy_sprite.sprites():
+            #     sprite.restart()
+            # for sprite in self.heal_sprite.sprites():
+            #     sprite.restart()
+            # for sprite in self.tiles.sprites():
+            #     sprite.restart()
 
     def OX_colliding_pl(self):
         player = self.player_sprite.sprite
@@ -129,8 +137,6 @@ class Level:
 
         self.hearth_bar.hp = player.return_hp()
 
-
-
     def OY_colliding_pl(self):
         player = self.player_sprite.sprite
         player.gravity_apply()
@@ -145,7 +151,6 @@ class Level:
                     player.rect.bottom = sprites.rect.top
                     player.j()
                     player.direction.y = 0
-
 
     # движение камеры
     def cameraScroll_X(self):
@@ -165,28 +170,27 @@ class Level:
             self.map_shift = 0
             player.start()
 
-
     def run(self):
-        #спавн
+        # спавн
         self.spawnpoint.update(self.map_shift)
         self.spawnpoint.draw(self.display_surface)
 
-        #блок финала
+        # блок финала
         self.final.update(self.map_shift)
         self.final.draw(self.display_surface)
 
-        #враг
+        # враг
         self.enemy_sprite.update(self.map_shift)
         self.enemy_sprite.draw(self.display_surface)
 
-        #хиллка
+        # хиллка
         self.heal_sprite.update(self.map_shift)
         self.heal_sprite.draw(self.display_surface)
 
         self.respawn(self.check())
 
         # платформы уровня
-        self.tiles.update(self.map_shift) # отвечает за смещение карты по оси x
+        self.tiles.update(self.map_shift)  # отвечает за смещение карты по оси x
         self.tiles.draw(self.display_surface)
 
         # шкала здоровья
@@ -200,4 +204,3 @@ class Level:
         self.OX_colliding_pl()
         self.OY_colliding_pl()
         self.player_sprite.draw(self.display_surface)
-

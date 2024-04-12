@@ -3,15 +3,16 @@ from src.levels.level import Level
 from src.properties.settings import *
 import pygame
 
+
 class WindowManager:
     def __init__(self, surface):
         pygame.init()
         self.initial_number = 0  # номер отображаемого окна
         self.display_surface = surface
         self.level = Level(level_map, self.display_surface)
-        self.button_start_game = button("Играть", 40, 400, 100, (132, 133, 179), 200, 200)
-        self.button_avtory = button("Авторы", 40, 400, 100, (132, 133, 179), 200, 350)
-        self.buttun_quit = button("Выход", 40, 400, 100, (132, 133, 179), 200, 500)
+        self.button_start_game = Button("Играть", 40, 400, 100, (132, 133, 179), 200, 200)
+        self.button_avtory = Button("Авторы", 40, 400, 100, (132, 133, 179), 200, 350)
+        self.button_quit = Button("Выход", 40, 400, 100, (132, 133, 179), 200, 500)
 
     def run(self):
         if self.initial_number == 0:
@@ -21,10 +22,9 @@ class WindowManager:
             self.level.run()
 
         if self.initial_number == 2:
-            # self.display_surface.fill((193, 193, 217))
-            self.make_text((screen_width/3, 200), "Наша команда:", 72, (13, 12, 11))
-            self.make_text((screen_width/5, 300), "Разработчики:", 62, (13, 12, 11))
-            self.make_text((screen_width/5, 350), "- Sezer_Ok       - ecrsty", 58, (13, 12, 11))
+            self.make_text((screen_width / 3, 200), "Наша команда:", 72, (13, 12, 11))
+            self.make_text((screen_width / 5, 300), "Разработчики:", 62, (13, 12, 11))
+            self.make_text((screen_width / 5, 350), "- Sezer_Ok       - ecrsty", 58, (13, 12, 11))
             self.make_text((screen_width / 5, 450), "Дизайнеры:", 62, (13, 12, 11))
             self.make_text((screen_width / 5, 500), "- Amarie           - Степанова Екатерина", 58, (13, 12, 11))
 
@@ -42,11 +42,11 @@ class WindowManager:
 
         self.button_start_game.draw(self.display_surface)
         self.button_avtory.draw(self.display_surface)
-        self.buttun_quit.draw(self.display_surface)
+        self.button_quit.draw(self.display_surface)
 
         self.button_start_game.blackout_and_click(x, y, (101, 102, 158), self.start_game)
         self.button_avtory.blackout_and_click(x, y, (101, 102, 158), self.razraby_ne_dauni)
-        self.buttun_quit.blackout_and_click(x, y, (101, 102, 158), quit)
+        self.button_quit.blackout_and_click(x, y, (101, 102, 158), quit)
 
     def esc(self):
         if self.initial_number != 0:

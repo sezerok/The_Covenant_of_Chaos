@@ -22,10 +22,9 @@ def main():
                 pygame.quit()
                 exit()
             elif event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_ESCAPE:  # типо паузы(недоработанно)
+                if event.key == pygame.K_ESCAPE:
                     main_win.esc()
 
-        # TODO: установка фона + смена уровня
         screen.blit(bg_image, (0, 0))
 
         main_win.run()  # загрузка главного меню
@@ -33,7 +32,6 @@ def main():
         pygame.display.update()
         clock.tick(60)  # fps control
 
+
 if __name__ == "__main__":
     main()
-
-

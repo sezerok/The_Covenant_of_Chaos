@@ -2,21 +2,24 @@ import time
 import pygame
 from src.properties.settings import tile_size
 
+
 class Player(pygame.sprite.Sprite):
     def __init__(self, pos):
         # инициализация
         super().__init__()
         self.image = pygame.Surface((tile_size // 2, tile_size))
-        self.image.fill((0,250,0))
+        self.image.fill((0, 250, 0))
         self.start_position = pos
         self.rect = self.image.get_rect(topleft=self.start_position)
 
         # движение игрока
-        self.direction = pygame.math.Vector2(0,0)
+        self.direction = pygame.math.Vector2(0, 0)
         self.speed_player = 8
         self.gravity = 0.8
         self.jump = -16
         self.j_val = False
+
+        # здоровье игрока
         self.attack = False
         self.health = 100
         self.death = False
@@ -30,7 +33,7 @@ class Player(pygame.sprite.Sprite):
     def attack_player(self):
         self.attack = True
 
-    def healing_player(self,heal):
+    def healing_player(self, heal):
         self.health = self.health + heal
 
     def return_hp(self):
@@ -47,7 +50,6 @@ class Player(pygame.sprite.Sprite):
             self.death = True
             self.stop()
 
-
     # функция перемещения
     def move(self):
         keys = pygame.key.get_pressed()
@@ -58,15 +60,7 @@ class Player(pygame.sprite.Sprite):
         else:
             self.direction.x = 0
 
-        # TODO: испроавить баг с камерой и передвижением
-        # если закомментить блок ускорения, то камера фиксится
-        # НО отваливается скорость при прыжке
-        # if keys[pygame.K_LSHIFT]:
-        #     self.speed_player = 12
-        # else:
-        #     self.speed_player = 8
-
-        if keys[pygame.K_SPACE] and self.j_val == False:
+        if keys[pygame.K_SPACE] and not self.j_val:
             self.jumping()
             self.j_val = True
 
@@ -77,7 +71,7 @@ class Player(pygame.sprite.Sprite):
         if self.health == 0:
             time.sleep(0.5)
             self.death = True
-            #self.respawn()
+
     def return_death(self):
         return self.death
 
@@ -87,6 +81,7 @@ class Player(pygame.sprite.Sprite):
         self.health = 100
         self.invincible = False
 
+    # отвечает за единичный прыжок
     def j(self):
         self.j_val = False
 
@@ -107,4 +102,3 @@ class Player(pygame.sprite.Sprite):
             current_time = time.time()
             if current_time - self.invincibility_timer >= self.invincibility_duration:
                 self.invincible = False
-        # self.rect.x+=self.direction.x*self.speed_player
